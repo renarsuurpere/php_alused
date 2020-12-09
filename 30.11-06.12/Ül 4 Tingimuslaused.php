@@ -11,6 +11,16 @@
     Jagaja <input type="text" name="t2"><br>
     <input type="submit" value="Saada">
 </form>
+<?php
+if(isset($_GET['t1']) or isset($_GET['t2'])){
+    if(empty($_GET['t1']) or empty($_GET['t2'])){
+        echo 'Sisestage mõlemad arvud!'.'<br>';
+    } else {
+        $jagatis = $_GET['t1'] / $_GET['t2'];
+        echo 'Jagatise vastus: '.$jagatis.'<br>';
+    }
+}
+?>
 <br>
 <br>
 <p>Sisesta Aadu ja Taneli vanus:</p>
@@ -19,38 +29,7 @@
     Tanel <input type="text" name="tanel"><br>
     <input type="submit" value="Saada">
 </form>
-<br>
-<br>
-<p>Sisesta ruudu või ristküliku külgede pikkus ja kõrgus:</p>
-<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="get">
-    Pikkus <input type="text" name="esimene"><br>
-    Kõrgus <input type="text" name="teine"><br>
-    <input type="submit" value="Saada">
-</form>
-<br>
-<br>
-<p>Sisestage oma sünniaasta:</p>
-<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="get">
-    Sünniaasta <input type="text" name="aasta"><br>
-    <input type="submit" value="Saada">
-</form>
-<br>
-<br>
-<p>Sisestage kontrolltöö punktid:</p>
-<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="get">
-   Punkte <input type="text" name="punktid"><br>
-    <input type="submit" value="Saada">
-</form>
 <?php
-if(isset($_GET['t1']) or isset($_GET['t2'])){
-    if(empty($_GET['t1']) or empty($_GET['t2'])){
-        echo 'Sisestage mõlemad arvud!'.'<br>';
-} else {
-    $jagatis = $_GET['t1'] / $_GET['t2'];
-echo 'Jagatise vastus: '.$jagatis.'<br>';
-}
-}
-
 if(isset($_GET['aadu']) or isset($_GET['tanel'])){
     if(empty($_GET['aadu']) or empty($_GET['tanel'])){
         echo 'Sisestage mõlematele vanused!'.'<br>';
@@ -62,17 +41,52 @@ if(isset($_GET['aadu']) or isset($_GET['tanel'])){
         echo 'Tanel ja Aadu on sama vanad.'.'<br>';
     }
 }
-
+?>
+<br>
+<br>
+<p>Sisesta ruudu või ristküliku külgede pikkus ja kõrgus:</p>
+<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="get">
+    Pikkus <input type="text" name="esimene"><br>
+    Kõrgus <input type="text" name="teine"><br>
+    <input type="submit" value="Saada">
+</form>
+<?php
 if(isset($_GET['esimene']) or isset($_GET['teine'])){
-if(empty($_GET['esimene']) or empty($_GET['teine'])){
-    echo 'Sisestage mõlemate külgede väärtused!'.'<br>';
-} else if($_GET['esimene'] == $_GET['teine']) {
-    echo 'Tegemist on ruuduga!'.'<br>';
-} else {
-    echo 'Tegemist on ristkülikuga!'.'<br>';
+    if(empty($_GET['esimene']) or empty($_GET['teine'])){
+        echo 'Sisestage mõlemate külgede väärtused!'.'<br>';
+    } else if($_GET['esimene'] == $_GET['teine']) {
+        echo 'Tegemist on ruuduga!'.'<br>';
+    } else {
+        echo 'Tegemist on ristkülikuga!'.'<br>';
+    }
 }
+?>
+<br>
+<br>
+<p>Sisestage oma sünniaasta:</p>
+<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="get">
+    Sünniaasta <input type="text" name="aasta"><br>
+    <input type="submit" value="Saada">
+</form>
+<?php
+if(isset($_GET['aasta'])){
+    if(empty($_GET['aasta'])){
+        echo 'Sisestage sünniaasta'.'<br>';
+    } elseif ($_GET['aasta'] % 5 == 0){
+        echo 'Tegemist on juubeliaastaga';
+    } else {
+        echo 'Ei ole juubeliaasta';
+    }
 }
-
+?>
+<br>
+<br>
+<p>Sisestage kontrolltöö punktid:</p>
+<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="get">
+   Punkte <input type="text" name="punktid"><br>
+    <input type="submit" value="Saada">
+</form>
+<?php
 if(isset($_GET['punktid'])){
     if(empty($_GET['punktid'])){
         echo 'Sisestage punktide arv!'.'<br>';
@@ -91,7 +105,5 @@ if(isset($_GET['punktid'])){
     }
 }
 ?>
-</body>
-</html>
 </body>
 </html>
