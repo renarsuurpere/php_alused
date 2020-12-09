@@ -5,13 +5,6 @@
     <title>Ül 4 Tingimuslaused</title>
 </head>
 <body>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>HTML vormist info töötlemine</title>
-</head>
-<body>
 <p>Sisesta jagamiseks sisestage kaks täisarvu:</p>
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="get">
     Jagatav <input type="text" name="t1"><br>
