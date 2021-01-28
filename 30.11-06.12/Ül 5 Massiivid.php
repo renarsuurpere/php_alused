@@ -146,53 +146,78 @@ echo '<br>'.'Ülesanne 8 - Google<br>
 <p>Sisestage googlest otsitav nimi:</p>
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="get">
     Nimi <input type="text" name="googleOtsi"><br>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Launch demo modal
-    </button>
+    <!-- Submit buttton trigger modal -->
+    <!-- panin siin just submit tüüpi nupp, et form oleks sellega saadetav -->
+    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >Otsi</button>
 </form>
-<!-- Button trigger modal -->
-
-
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <?php
-                $google = array("Feake","Bradwell","Dreger","Bloggett","Lambole","Daish","Lippiett","
+<?php
+// ennem modaali loomist paneme andmed paika
+$google = array("Feake","Bradwell","Dreger","Bloggett","Lambole","Daish","Lippiett","
 Blackie","Stollenbeck","Houseago","Dugall","Sprowson","Kitley","Mcenamin",
-                    "Allchin","Doghartie","Brierly","Pirrone","Fairnie","Seal","Scoffins",
-                    "Galer","Matevosian","DeBlase","Cubbin","Izzett","Ebi","Clohisey",
-                    "Prater","Probart","Samwaye","Concannon","MacLure","Eliet","Kundt","Reyes");
-                echo '<pre>';
-                print_r($_GET);
-                echo '</pre>';
-                if(isset($_GET['googleOtsi'])) {
-                    if (empty($_GET['googleOtsi'])) {
-                        echo 'Sisestage otsitav nimi' . '<br>';
-                    } elseif (in_array($_GET['googleOtsi'], $google)) {
-                        echo "Nimi on listis";
-                    } else {
-                        echo "Nime pole listis";
-                    }
-                }
-                ?>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+    "Allchin","Doghartie","Brierly","Pirrone","Fairnie","Seal","Scoffins",
+    "Galer","Matevosian","DeBlase","Cubbin","Izzett","Ebi","Clohisey",
+    "Prater","Probart","Samwaye","Concannon","MacLure","Eliet","Kundt","Reyes");
+// siis kontrollime, kas vormi andmed on saadetud
+if(isset($_GET['googleOtsi'])) {
+    if (empty($_GET['googleOtsi'])) {
+        // kui mitte - valmistame juhtiv lause
+        $sisu = 'Sisestage otsitav nimi' . '<br>';
+    } elseif (in_array($_GET['googleOtsi'], $google)) {
+        // muidu valmistame otsingu tulemus
+        $sisu = "Nimi on listis";
+    } else {
+        $sisu = "Nimi pole listis";
+    }
+    // NB! siin if, mis kontrollib, et vorm saatnud andmed veel ei lõpe!!!
+    // Nüüd loome modaal koos ette valmistatud juhtivlaustega
+    ?>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Otsingu tulemus:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <?php
+                    // Siin on just if-s valmistatud sisu väljastamine
+                    echo $sisu;
+                    ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <?php
+    // Ja siin on modaali näitamine jQuery abil
+    echo "<script>$('#exampleModal').modal('show')</script>";
+} // ja sellega lõpeb php if lause osa!!!
+?>
+<?php
+echo '<br>'.'Ülesanne 9 - Pildid<br>
+* tekita /img  kataloog ja sinna profiilipildid samade nimedega<br>
+* kuva massiivist kolmas pilt<br>
+* kuva massiivist kõik pildid<br>
+* kuva pildid Bootstrapi abil 6 veerus'.'<br>'.'<br>';
+
+$dir ='img/';
+$pildid = array('devlin','freeland','gabriel','pete','peterus','prentice');
+foreach ($pildid as $pilt){
+    $aadress =  $dir.$pilt.'.jpg';
+
+    echo '<img src="'.$aadress.'" width="150" height="150">';
+}
+//echo '<br> Esimene pilt : '.$esimenePilt.'<br>';
+?>
+
 </body>
 </html>
